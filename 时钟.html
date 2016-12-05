@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.clock {
+			width: 600px;
+			height: 600px;
+			background: url(images/clock.jpg) no-repeat;
+			position: relative;
+			margin: 50px auto;
+		}
+		.clock div {
+			width: 600px;
+			height: 600px;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		.hour {
+			background: url(images/hour.png) no-repeat center center;
+		}
+		.minute {
+			background: url(images/minute.png) no-repeat center center;
+		}
+		.second {
+			background: url(images/second.png) no-repeat center center;
+		}
+	</style>
+</head>
+<body>
+	<div class="clock">
+		<div class="hour" id="hour"></div>
+		<div class="minute" id="minute"></div>
+		<div class="second" id="second"></div>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	var hour = document.getElementById('hour');
+	var minute = document.getElementById('minute');
+	var second = document.getElementById('second');
+	var date, h, m, s, ms;
+	setInterval(function() {
+		date = new Date();
+		ms = date.getMilliseconds();
+		s = date.getSeconds() + ms / 1000;
+		m = date.getMinutes() + s / 60;
+		h = date.getHours() % 12 + m / 60;
+		second.style.WebkitTransform = 'rotate('+ 6*s +'deg)';  // Safari 和 Chrome
+		minute.style.WebkitTransform = 'rotate('+ 6*m +'deg)';
+		hour.style.WebkitTransform = 'rotate('+ 30*h +'deg)';
+
+		second.style.transform = 'rotate('+ 6*s +'deg)';  // IE10及以上, Mozilla, Opera 和 Chrome
+		minute.style.transform = 'rotate('+ 6*m +'deg)';
+		hour.style.transform = 'rotate('+ 30*h +'deg)';
+	}, 1000);
+</script>
